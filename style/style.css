@@ -64,4 +64,13 @@ body .wrapper .wrap-results span:first-child {
   width: -moz-fit-content;
   width: fit-content;
   border-bottom: 2px solid orange;
+}
+body .wrapper .wrap-order {
+  margin-top: 30px;
+}
+body .wrapper .wrap-order .wrap-order-content {
+  display: inline-block;
+  padding-bottom: 4px;
+  border-bottom: 2px solid orange;
+  font-size: 18px;
 }/*# sourceMappingURL=style.css.map */

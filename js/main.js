@@ -2,6 +2,7 @@ class Hamburger {
 	constructor() {
 		this.tughriks = 0;
 		this.calories = 0;
+		this.orders = [];
 	};
 	size() {
 		setTimeout(() => {
@@ -21,6 +22,7 @@ class Hamburger {
 			smallHam.addEventListener('click', () => {
 				this.tughriks += 50;
 				this.calories += 20;
+				this.orders.push(smallHam.innerHTML);
 				console.log(this);
 				wrapFoodContent.innerHTML = '';
 				this.type();
@@ -28,6 +30,7 @@ class Hamburger {
 			bigHam.addEventListener('click', () => {
 				this.tughriks += 100;
 				this.calories += 40;
+				this.orders.push(bigHam.innerHTML);
 				console.log(this);
 				wrapFoodContent.innerHTML = '';
 				this.type();
@@ -56,18 +59,23 @@ class Hamburger {
 		document.getElementById('cheese').addEventListener('click', () => {
 			this.tughriks += 10;
 			this.calories += 20;
+			this.orders.push(document.getElementById('cheese').innerHTML);
 			console.log(this);
 		});
 		document.getElementById('salad').addEventListener('click', () => {
 			this.tughriks += 20;
 			this.calories += 5;
+			this.orders.push(document.getElementById('salad').innerHTML)
 			console.log(this);
 		});
 		document.getElementById('potatoes').addEventListener('click', () => {
 			this.tughriks += 15;
 			this.calories += 10;
+			this.orders.push(document.getElementById('potatoes').innerHTML)
 			console.log(this);
 		});
+
+		
 
 		toContinue('Достаточно ли для вас начинки? \u{1F914}', () => this.supplements());
 	};
@@ -89,15 +97,26 @@ class Hamburger {
 		document.getElementById('seasoning').addEventListener('click', () => {
 			this.tughriks += 15;
 			this.calories += 0;
+			this.orders.push(document.getElementById('seasoning').innerHTML);
 			console.log(this);
 		});
 		document.getElementById('mayonnaise').addEventListener('click', () => {
 			this.tughriks += 20;
 			this.calories += 5;
+			this.orders.push(document.getElementById('mayonnaise').innerHTML);
 			console.log(this);
 		});
 
+
+
 		toContinue('Достаточно ли для вас добавок? \u{1F914}', () => {
+			const cheeseCount = this.orders.filter(item => item === 'Сыр').length;
+			const salatCount = this.orders.filter(item => item === 'Салат').length;
+			const potatoesCount = this.orders.filter(item => item === 'Картофель').length;
+
+			const seasoningCount = this.orders.filter(item => item === 'Приправа').length;
+			const mayonnaiseCount = this.orders.filter(item => item === 'Майонез').length;
+			
 			wrapTitleContent.innerHTML = 'Спасибо, что воспользовались нашей сетью фастфудов \u{1F970}. Нам очень приятно \u{1F618}. Приятного аппетита \u{1F495}';
 			const wrapResults = document.createElement('div');
 			wrapResults.classList.add('wrap-results');
@@ -110,6 +129,13 @@ class Hamburger {
 			wrapResultsCalories.classList.add('wrap-results-calories');
 			wrapResultsCalories.innerHTML = `Калорийность: ${this.calories}`;
 			wrapResults.appendChild(wrapResultsCalories);
+			const wrapOrder = document.createElement('div');
+			wrapOrder.classList.add('wrap-order');
+			wrapper.appendChild(wrapOrder);
+			const wrapOrderContent = document.createElement('span');
+			wrapOrderContent.classList.add('wrap-order-content');
+			wrapOrderContent.innerHTML = `Вами был заказан: ${this.orders[0]} гамбургер с начинками: Сыр - ${cheeseCount}х, Салат - ${salatCount}х, Картофель - ${potatoesCount}х. А так же добавками: Приправа - ${seasoningCount}х, Маёнез - ${mayonnaiseCount}х.`;
+			wrapOrder.appendChild(wrapOrderContent);
 		});
 	};
 };

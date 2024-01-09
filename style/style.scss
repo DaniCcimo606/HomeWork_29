@@ -68,5 +68,14 @@ body {
                 }
             }
         }
+        .wrap-order {
+            margin-top: 30px;
+            .wrap-order-content {
+                display: inline-block;
+                padding-bottom: 4px;
+                border-bottom: 2px solid orange;
+                font-size: 18px;
+            }
+        }
     }
 }
